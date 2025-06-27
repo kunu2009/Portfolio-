@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kunal's Portfolio</title>
+  <style>
+    :root {
+      --bg: #fafafa;
+      --text: #222;
+      --nav-bg: #fff;
+      --section-bg: #fefefe;
+      --card-bg: #fff;
+      --accent: #6200ee;
+    }
+    body.dark-mode {
+      --bg: #121212;
+      --text: #eee;
+      --nav-bg: #1f1f1f;
+      --section-bg: #181818;
+      --card-bg: #282828;
+      --accent: #bb86fc;
+    }
+    /* Global styles */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      scroll-behavior: smooth;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5em 1em;
+      background-color: var(--nav-bg);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    /* Logo/branding */
+    .logo {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: var(--accent);
+    }
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+    nav li {
+      margin: 0 1em;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--text);
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: var(--accent);
+    }
+    /* Dark mode toggle button */
+    #theme-toggle {
+      background: none;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      border-radius: 5px;
+      padding: 0.3em 0.6em;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+      font-size: 0.9em;
+    }
+    #theme-toggle:hover {
+      background-color: var(--accent);
+      color: #fff;
+    }
+    /* Sections */
+    section {
+      padding: 4em 2em;
+      background-color: var(--section-bg);
+    }
+    /* Hero/Home section */
+    #home {
+      text-align: center;
+      padding-top: 6em;
+      padding-bottom: 6em;
+      background-color: var(--section-bg);
+    }
+    #home h1 {
+      margin: 0;
+      font-size: 2.5em;
+    }
+    #home h2 {
+      margin: 0.5em 0;
+      font-size: 1.2em;
+      min-height: 1.2em; /* reserve space for typed text */
+    }
+    /* About section */
+    #about p {
+      max-width: 800px;
+      margin: 1em auto;
+      line-height: 1.5;
+    }
+    /* Skills bars */
+    .skill {
+      max-width: 600px;
+      margin: 1.5em auto;
+    }
+    .skill h3 {
+      margin: 0.5em 0;
+      font-size: 1.1em;
+    }
+    .bar {
+      width: 100%;
+      background: #ddd;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 1em;
+      width: 0;
+      background: var(--accent);
+      border-radius: 4px;
+      transition: width 2s ease-in-out;
+    }
+    .bar span {
+      float: right;
+      margin-right: 0.5em;
+      font-size: 0.9em;
+      color: var(--text);
+    }
+    /* Projects cards */
+    .projects-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2em;
+      max-width: 1000px;
+      margin: 2em auto;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      padding: 1.5em;
+      width: 300px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+    .card h3 {
+      margin-top: 0;
+      color: var(--accent);
+    }
+    .card p {
+      font-size: 0.95em;
+      line-height: 1.4;
+    }
+    /* Contact form */
+    .contact-form {
+      max-width: 600px;
+      margin: 1em auto;
+      background: var(--card-bg);
+      padding: 2em;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .contact-form label {
+      display: block;
+      margin-top: 1em;
+      font-weight: bold;
+    }
+    .contact-form input[type="text"],
+    .contact-form input[type="email"],
+    .contact-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 0.3em;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      resize: vertical;
+      background: #fff;
+      color: #000;
+    }
+    .contact-form input, .contact-form textarea {
+      font-family: inherit;
+      font-size: 1em;
+    }
+    .contact-form textarea {
+      height: 100px;
+    }
+    .contact-form input[type="submit"] {
+      background-color: var(--accent);
+      color: #fff;
+      padding: 0.7em 1.2em;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 1.2em;
+      font-size: 1em;
+    }
+    .contact-form input[type="submit"]:hover {
+      background-color: #4b0082;
+    }
+    /* Footer style */
+    footer {
+      text-align: center;
+      padding: 1em;
+      font-size: 0.8em;
+    }
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        align-items: center;
+      }
+      nav li {
+        margin: 0.5em 0;
+      }
+      .projects-grid {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">7K Ecosystem</div>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Me</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <button id="theme-toggle">Toggle Theme</button>
+  </header>
+  <section id="home">
+    <h1>Hello, I'm Kunal</h1>
+    <h2><span id="typed-text"></span></h2>
+    <p>12th Grade Arts Student | Aspiring Corporate Lawyer</p>
+  </section>
+  <section id="about">
+    <h2>About Me</h2>
+    <p>I am a 12th-grade arts student from Maharashtra, currently preparing for the MH-CET Law entrance exam with the ambition to become a corporate lawyer. Beyond academics, I am a curious and driven individual with a passion for solving problems and learning new things. I enjoy playing chess and solving Sudoku puzzles, activities that sharpen my analytical thinking. I am also interested in hardware and software projects, as well as learning new languages and skills. These interests reflect my curiosity...</p>
+  </section>
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skill">
+      <h3>Analytical Reasoning</h3>
+      <div class="bar"><div class="bar-fill" data-value="90"></div><span>90%</span></div>
+    </div>
+    <div class="skill">
+      <h3>Problem Solving (Puzzles)</h3>
+      <div class="bar"><div class="bar-fill" data-value="85"></div><span>85%</span></div>
+    </div>
+    <div class="skill">
+      <h3>Communication (English/Hindi)</h3>
+      <div class="bar"><div class="bar-fill" data-value="80"></div><span>80%</span></div>
+    </div>
+    <div class="skill">
+      <h3>Programming (Basics)</h3>
+      <div class="bar"><div class="bar-fill" data-value="60"></div><span>60%</span></div>
+    </div>
+    <div class="skill">
+      <h3>Web/Hardware Interest</h3>
+      <div class="bar"><div class="bar-fill" data-value="50"></div><span>50%</span></div>
+    </div>
+  </section>
+  <section id="projects">
+    <h2>Projects (7K Ecosystem)</h2>
+    <div class="projects-grid">
+      <div class="card">
+        <h3>7K Ecosystem</h3>
+        <p>A personal brand uniting my projects across law, technology, games, and learning under the “7K” vision. It reflects my diverse interests and ambition to integrate knowledge and skills.</p>
+      </div>
+      <div class="card">
+        <h3>7K Law Prep</h3>
+        <p>Resources and notes for law exam preparation, reflecting my dedication to studying corporate law and legal concepts.</p>
+      </div>
+      <div class="card">
+        <h3>7K Chess Academy</h3>
+        <p>A collection of chess puzzles and strategic insights, showcasing my interest in chess and analytical thinking.</p>
+      </div>
+      <div class="card">
+        <h3>7K Code Lab</h3>
+        <p>Mini coding and hardware projects, demonstrating my curiosity and skills in programming and engineering.</p>
+      </div>
+      <div class="card">
+        <h3>7K Language Corner</h3>
+        <p>Language learning tools and practice exercises, reflecting my passion for learning new languages and communication.</p>
+      </div>
+    </div>
+  </section>
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <form class="contact-form" action="#" method="post">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" placeholder="Your name..">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="Your email..">
+      <label for="message">Message</label>
+      <textarea id="message" name="message" placeholder="Write a message..."></textarea>
+      <input type="submit" value="Send Message">
+    </form>
+  </section>
+  <footer>
+    <p>&copy; 2025 Kunal's Portfolio. All rights reserved.</p>
+  </footer>
+  <script>
+    // Typewriter text effect (inspired by W3Schools example6)
+    const introText = "Aspiring Corporate Lawyer and Life-long Learner.";
+    let idx = 0;
+    function typeWriter() {
+      if (idx < introText.length) {
+        document.getElementById("typed-text").innerHTML += introText.charAt(idx);
+        idx++;
+        setTimeout(typeWriter, 100);
+      }
+    }
+    window.onload = typeWriter;
+
+    // Toggle dark/light mode by toggling a class on the body (per W3Schools guide7)
+    const themeBtn = document.getElementById("theme-toggle");
+    themeBtn.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+    });
+
+    // Animate skill bars on load
+    window.addEventListener('load', () => {
+      document.querySelectorAll('.bar-fill').forEach(el => {
+        let value = el.getAttribute('data-value');
+        el.style.width = value + '%';
+      });
+    });
+  </script>
+</body>
+  </html>
